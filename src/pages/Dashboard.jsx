@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { TaskCard } from '../components/TaskCard';
+import { TaskForm } from '../components/TaskForm';
 
 /**
  * Composant conteneur principal de l'application.
@@ -8,7 +9,7 @@ import { TaskCard } from '../components/TaskCard';
 export const Dashboard = () => {
     // 1. Initialiser l'état local avec une liste de tâches (structure demandée avec id, titre, description, statut).
     // => Utiliser useState.
-    const [tasks] = useState([
+    const [tasks, setTasks] = useState([
         {
             id: 'task-1',
             titre: 'Concevoir la maquette',
@@ -29,6 +30,12 @@ export const Dashboard = () => {
         },
     ]);
 
+    const handleAddTask = (newTask) => {
+        // /!\ Interdit d'utiliser push().
+        // Créer une nouvelle référence de tableau :
+        setTasks([...tasks, newTask]);
+    };
+
     return (
         <div className="dashboard-container">
             <section className="dashboard-intro">
@@ -37,8 +44,7 @@ export const Dashboard = () => {
             </section>
 
             <section className="dashboard-form-zone">
-                <h2>Nouvelle tâche</h2>
-                <p>Le formulaire d’ajout sera intégré ici dans l’étape suivante.</p>
+                <TaskForm onAddTask={handleAddTask} />
             </section>
 
             <section className="dashboard-tasks-list">
