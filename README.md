@@ -34,7 +34,7 @@ git clone https://github.com/RedThek/TaskFlow.git
 cd TaskFlow
 
 # Installer les dépendances
-enpm install
+npm install
 ```
 
 > Assurez-vous d'avoir une version récente de Node.js installée (Recommandé : 18.x ou supérieur).
