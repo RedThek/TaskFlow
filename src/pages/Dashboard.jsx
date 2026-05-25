@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useLocalStorage } from '/src/hooks/useLocalStorage';
 import { TaskCard } from '../components/TaskCard';
 import { TaskForm } from '../components/TaskForm';
 
@@ -8,27 +8,8 @@ import { TaskForm } from '../components/TaskForm';
  */
 export const Dashboard = () => {
     // 1. Initialiser l'état local avec une liste de tâches (structure demandée avec id, titre, description, statut).
-    // => Utiliser useState.
-    const [tasks, setTasks] = useState([
-        {
-            id: 'task-1',
-            titre: 'Concevoir la maquette',
-            description: 'Créer les écrans principaux et le parcours utilisateur pour TaskFlow.',
-            statut: 'À faire',
-        },
-        {
-            id: 'task-2',
-            titre: 'Développer le tableau de bord',
-            description: 'Implémenter l’affichage dynamique des tâches et les cartes de résumé.',
-            statut: 'En cours',
-        },
-        {
-            id: 'task-3',
-            titre: 'Ajouter la persistance locale',
-            description: 'Sauvegarder les tâches dans localStorage pour maintenir l’état entre les sessions.',
-            statut: 'Terminé',
-        },
-    ]);
+    // => Utiliser useLocalStorage pour charger le tableau depuis le localStorage.
+    const [tasks, setTasks] = useLocalStorage('taskflow_data', []);
 
     const handleAddTask = (newTask) => {
         // /!\ Interdit d'utiliser push().
